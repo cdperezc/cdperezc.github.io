@@ -52,10 +52,15 @@
                         var domain = "https://training.gpsgate.com";
                         var apiPath = '/comGpsGate/api/v.1/';
 
-                        d3.json(domain + apiPath + 'applications/' + applicationid + '/geofences/' + geofenceid + '/users?pagesize=' + pagesize,
-                              function (users) {
+                        d3.json(domain + apiPath + 'applications/' + applicationid + '/geofences/' + geofenceid + '/users?pagesize=' + pagesize)
+			      .header("Authentication","41xD9RECuDPQQSdCRpHbOJFbUcNTclhd3n3HomOx68FZEl9pkWbx5qfWYQISjHbn")
+			      .get(
+                                   function (users) {
 
-                                    d3.json(domain + apiPath + 'applications/' + applicationid + '/geofences/' + geofenceid, function (geofence) {
+                                    d3.json(domain + apiPath + 'applications/' + applicationid + '/geofences/' + geofenceid) 
+					  .header("Authentication","41xD9RECuDPQQSdCRpHbOJFbUcNTclhd3n3HomOx68FZEl9pkWbx5qfWYQISjHbn")
+			                  .get(
+					    function (geofence) {
                                           if (!users || !geofence)
                                                 return;
                                           var canvas = document.querySelector("canvas"),
