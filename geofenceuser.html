@@ -53,11 +53,11 @@
                         var apiPath = '/comGpsGate/api/v.1/';
 
                         d3.json(domain + apiPath + ‘applications/’ + applicationid + ‘/geofences/’ + geofenceid + ‘/users?pagesize=’ + pagesize)
-			      .header(“Authentication”,“41xD9RECuDPQQSdCRpHbOJFbUcNTclhd3n3HomOx68FZEl9pkWbx5qfWYQISjHbn”)
+			      .header(“Authentication”,“Hh9IALcjtsAXuGVWEUmtuUZ12oacH%2bW6Sv1N7eAoQwJYfFQKKhYcXcnna2XQx3%2fn”)
 			      .get(
                                    function (users) {
                                     d3.json(domain + apiPath + ‘applications/’ + applicationid + ‘/geofences/’ + geofenceid)
-					  .header(“Authentication”,“41xD9RECuDPQQSdCRpHbOJFbUcNTclhd3n3HomOx68FZEl9pkWbx5qfWYQISjHbn”)
+					  .header(“Authentication”,“Hh9IALcjtsAXuGVWEUmtuUZ12oacH%2bW6Sv1N7eAoQwJYfFQKKhYcXcnna2XQx3%2fn”)
 			                  .get(
 					    function (geofence) {
                                           if (!users || !geofence)
