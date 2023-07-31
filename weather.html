@@ -1,0 +1,63 @@
+﻿<html>
+
+<head>
+      <meta charset="utf-8">
+      <meta content="" name="description">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	  
+      <title>Weather</title>
+</head>
+
+<body>
+      <div class="container">
+			<h3>Current weather at map location</h3>
+			<div class="panel-group">
+				<div class="panel panel-success"> 
+					<div class="panel-heading">Area name:</div>
+					<div class="panel-body" id="areaname"></div>
+				</div>
+				<div class="panel panel-info"> 
+					<div class="panel-heading">Temperature:</div>
+					<div class="panel-body" id="temperature"></div>
+				</div>
+				<div class="panel panel-warning">
+					<div class="panel-heading">Weather:</div>
+					<div class="panel-body" id="weather"></div>
+				</div>
+			</div>
+            <script>
+                  var load = function () {
+						try
+						{
+							map = window.parent.VTUI.getMap();
+							center = map.getCenter();
+														
+							const Http = new XMLHttpRequest();
+							Http.open("GET", 'https://api.openweathermap.org/data/2.5/weather?lat=' + center.lat + '&lon=' + center.lng + '&appid=165c979ab2143c1c311c5633fe24c868');
+							Http.send();
+							Http.onreadystatechange=(e)=>{
+							
+								try{
+									var result = JSON.parse(Http.responseText);
+
+									document.getElementById("areaname").innerText = result.name;
+									document.getElementById("temperature").innerText = Math.floor((result.main.temp - 273.15) * 100) / 100 + " °C";
+									document.getElementById("weather").innerText = result.weather[0].main;
+								}
+								catch(err)
+								{}
+								
+							}
+						}catch(err){}
+                  };
+				  
+				  map = window.parent.VTUI.getMap();
+				  window.parent.connect(map, 'onmoveend', load);
+            </script>
+      </div>
+</body>
+
+</html>
